@@ -24,14 +24,16 @@ public class ProductoController {
 
 	@Transactional
 	@GetMapping
-	@CrossOrigin(origins = "http://localhost:3000")
+	//@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "https://robertofcg.github.io")	
 	public List<ProductosJava> getAll(){
 		return productoService.getProductosJava();
 	}
 	
 	@Transactional
 	@GetMapping("/{id_Producto}")
-	@CrossOrigin(origins = "http://localhost:3000")
+	//@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "https://robertofcg.github.io")	
 	public Optional<ProductosJava> getPersonById(@PathVariable("id_Producto") Long id_Producto){
 		return productoService.getProductosJava(id_Producto);
 	}
