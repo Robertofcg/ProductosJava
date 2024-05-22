@@ -9,5 +9,5 @@ public interface ProductoService {
 	
 	List<ProductosJava> getProductosJava();
 	Optional<ProductosJava> getProductosJava(Long id);
-	void RegistrarProducto(ProductosJava producto);
+	public ProductosJava RegistrarProducto(ProductosJava producto);
 }

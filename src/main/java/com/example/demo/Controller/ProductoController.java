@@ -21,6 +21,8 @@ import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping(path = "api/productos")
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://robertofcg.github.io")
 public class ProductoController {
 
 	@Autowired
@@ -28,25 +30,22 @@ public class ProductoController {
 
 	@Transactional
 	@GetMapping
-	//@CrossOrigin(origins = "http://localhost:3000")
-	@CrossOrigin(origins = "https://robertofcg.github.io")
+	
+	
 	public List<ProductosJava> getAll() {
 		return productoService.getProductosJava();
 	}
 
 	@Transactional
 	@GetMapping("/{id_Producto}")
-	//@CrossOrigin(origins = "http://localhost:3000")
-	@CrossOrigin(origins = "https://robertofcg.github.io")
 	public Optional<ProductosJava> getPersonById(@PathVariable("id_Producto") Long id_Producto) {
 		return productoService.getProductosJava(id_Producto);
 	}
 
 	@Transactional
 	@PostMapping("/insertar")
-    public ResponseEntity<?> insertarProducto(@RequestBody ProductosJava producto) {
-        productoService.RegistrarProducto(producto);
-        return ResponseEntity.ok("Producto creado exitosamente");
-    }
+	public ProductosJava insertarProducto(@RequestBody ProductosJava producto) {
+		return productoService.RegistrarProducto(producto);
+	}
 
 }

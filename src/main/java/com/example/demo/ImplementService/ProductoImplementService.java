@@ -36,8 +36,8 @@ public class ProductoImplementService implements ProductoService {
 	}
 
 	@Override
-    public void RegistrarProducto(ProductosJava producto) {
-        productoRepository.save(producto);
+    public ProductosJava RegistrarProducto(ProductosJava producto) {
+        return productoRepository.save(producto);
     }
 
 }
