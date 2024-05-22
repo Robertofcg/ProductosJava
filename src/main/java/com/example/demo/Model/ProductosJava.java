@@ -3,6 +3,8 @@ package com.example.demo.Model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,81 +21,82 @@ import lombok.Data;
 public class ProductosJava {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "Nombre", nullable = false, length = 100)
-	private String nombre;
+    @Column(name = "Nombre", nullable = false, length = 100)
+    private String nombre;
 
-	@Column(name = "Cantidad")
-	private Integer cantidad;
+    @Column(name = "Cantidad")
+    private Integer cantidad;
 
-	@Column(name = "Marca", length = 50)
-	private String marca;
+    @Column(name = "Marca", length = 50)
+    private String marca;
 
-	@Column(name = "Modelo", length = 50)
-	private String modelo;
+    @Column(name = "Modelo", length = 50)
+    private String modelo;
 
-	@Column(name = "Voltaje", length = 20)
-	private String voltaje;
+    @Column(name = "Voltaje", length = 20)
+    private String voltaje;
 
-	@Column(name = "Potencia", precision = 10, scale = 2)
-	private BigDecimal potencia;
+    @Column(name = "Potencia", precision = 10, scale = 2)
+    private BigDecimal potencia;
 
-	@Column(name = "Precio", nullable = false, precision = 10, scale = 2)
-	private BigDecimal precio;
+    @Column(name = "Precio", nullable = false, precision = 10, scale = 2)
+    private BigDecimal precio;
 
-	@Column(name = "Lumenes")
-	private Integer lumenes;
+    @Column(name = "Lumenes")
+    private Integer lumenes;
 
-	@Column(name = "atenuable")
-	private String atenuable; // Cambiado a tipo String
+    @Column(name = "Atenuable")
+    private String atenuable;
 
-	@Column(name = "VidaUtil", length = 50)
-	private String vidaUtil;
+    @Column(name = "VidaUtil", length = 50)
+    private String vidaUtil;
 
-	@Column(name = "Dimensiones", length = 50)
-	private String dimensiones;
+    @Column(name = "Dimensiones", length = 50)
+    private String dimensiones;
 
-	@Column(name = "Angulo", precision = 5, scale = 2)
-	private BigDecimal angulo;
+    @Column(name = "Angulo", precision = 5, scale = 2)
+    private BigDecimal angulo;
 
-	@Column(name = "Descripcion", columnDefinition = "TEXT")
-	private String descripcion;
+    @Column(name = "Descripcion", columnDefinition = "TEXT")
+    private String descripcion;
 
-	@Column(name = "Imagenes", columnDefinition = "LONGBLOB")
-	private byte[] imagenes;
+    @Column(name = "Imagenes", columnDefinition = "LONGBLOB")
+    private byte[] imagenes;
 
-	@Column(name = "Categoria", length = 45)
-	private String categoria;
+    @Column(name = "Categoria", length = 45)
+    private String categoria;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "productoId")
-	private List<Imagenes> imagenesProd;
-	
-	public ProductosJava() {}
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "producto")
+    @JsonManagedReference
+    private List<Imagenes> imagenesProd;
 
-	public ProductosJava(Long id, String nombre, Integer cantidad, String marca, String modelo, String voltaje,
-			BigDecimal potencia, BigDecimal precio, Integer lumenes, String atenuable, String vidaUtil,
-			String dimensiones, BigDecimal angulo, String descripcion, byte[] imagenes, String categoria,
-			List<Imagenes> imagenesProd) {
-		this.id = id;
-		this.nombre = nombre;
-		this.cantidad = cantidad;
-		this.marca = marca;
-		this.modelo = modelo;
-		this.voltaje = voltaje;
-		this.potencia = potencia;
-		this.precio = precio;
-		this.lumenes = lumenes;
-		this.atenuable = atenuable;
-		this.vidaUtil = vidaUtil;
-		this.dimensiones = dimensiones;
-		this.angulo = angulo;
-		this.descripcion = descripcion;
-		this.imagenes = imagenes;
-		this.categoria = categoria;
-		this.imagenesProd = imagenesProd;
-	}
+    public ProductosJava() {}
+
+    public ProductosJava(Long id, String nombre, Integer cantidad, String marca, String modelo, String voltaje,
+                         BigDecimal potencia, BigDecimal precio, Integer lumenes, String atenuable, String vidaUtil,
+                         String dimensiones, BigDecimal angulo, String descripcion, byte[] imagenes, String categoria,
+                         List<Imagenes> imagenesProd) {
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.voltaje = voltaje;
+        this.potencia = potencia;
+        this.precio = precio;
+        this.lumenes = lumenes;
+        this.atenuable = atenuable;
+        this.vidaUtil = vidaUtil;
+        this.dimensiones = dimensiones;
+        this.angulo = angulo;
+        this.descripcion = descripcion;
+        this.imagenes = imagenes;
+        this.categoria = categoria;
+        this.imagenesProd = imagenesProd;
+    }
 
 	public Long getId() {
 		return id;

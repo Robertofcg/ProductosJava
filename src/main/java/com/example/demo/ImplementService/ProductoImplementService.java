@@ -30,8 +30,14 @@ public class ProductoImplementService implements ProductoService {
 		if (personaOptional.isPresent()) {
 			return productoRepository.findById(id);
 		} else {
-	        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontró el producto con el ID proporcionado: " + id);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+					"No se encontró el producto con el ID proporcionado: " + id);
 		}
 	}
+
+	@Override
+    public void RegistrarProducto(ProductosJava producto) {
+        productoRepository.save(producto);
+    }
 
 }

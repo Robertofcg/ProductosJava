@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,18 +20,21 @@ public class Imagenes {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
-	@Column(name = "Imagenes", columnDefinition="LONGBLOB")
-	private byte[] imagenes;
-	
-	@Column(name = "producto_id")
-    private Long productoId;
-	public Imagenes() {}
+    
+    @Column(name = "Imagenes", columnDefinition = "LONGBLOB")
+    private byte[] imagenes;
+    
+    @ManyToOne
+    @JoinColumn(name = "producto_id", nullable = false)
+    @JsonBackReference
+    private ProductosJava producto;
 
-	public Imagenes(Long id, byte[] imagenes, Long productoId) {
+    public Imagenes() {}
+
+    public Imagenes(Long id, byte[] imagenes, ProductosJava producto) {
         this.id = id;
         this.imagenes = imagenes;
-        this.productoId = productoId;
+        this.producto = producto;
     }
 	
 	public Long getId() {
@@ -48,12 +53,14 @@ public class Imagenes {
 		this.imagenes = imagenes;
 	}
 
-	public Long getProductoId() {
-		return productoId;
+	public ProductosJava getProducto() {
+		return producto;
 	}
 
-	public void setProductoId(Long productoId) {
-		this.productoId = productoId;
-	}	
+	public void setProducto(ProductosJava producto) {
+		this.producto = producto;
+	}
+
+		
 	
 }
