@@ -21,8 +21,8 @@ import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping(path = "api/productos")
-@CrossOrigin(origins = "http://localhost:3000")
-//@CrossOrigin(origins = "https://robertofcg.github.io")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://robertofcg.github.io")
 public class ProductoController {
 
 	@Autowired
