@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Model.ProductosJava;
+import com.example.demo.RecursoNoEncontradoExcepcion.RecursoNoEncontradoExcepcion;
 import com.example.demo.Service.ProductoService;
 
 import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping(path = "api/productos")
-//@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "https://robertofcg.github.io")
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://robertofcg.github.io")
 public class ProductoController {
 
 	@Autowired
@@ -30,16 +31,19 @@ public class ProductoController {
 
 	@Transactional
 	@GetMapping
-	
-	
+
 	public List<ProductosJava> getAll() {
 		return productoService.getProductosJava();
 	}
 
 	@Transactional
 	@GetMapping("/{id_Producto}")
-	public Optional<ProductosJava> getPersonById(@PathVariable("id_Producto") Long id_Producto) {
-		return productoService.getProductosJava(id_Producto);
+	public ResponseEntity<ProductosJava> getPersonById(@PathVariable Long id_Producto) {
+		ProductosJava productos = productoService.getProductosJava(id_Producto);
+		if (productos == null)
+			throw new RecursoNoEncontradoExcepcion("No se encontro el producto id: " + id_Producto);
+		return ResponseEntity.ok(productos);
+
 	}
 
 	@Transactional

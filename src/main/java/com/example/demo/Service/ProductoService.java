@@ -8,6 +8,6 @@ import com.example.demo.Model.ProductosJava;
 public interface ProductoService {
 	
 	List<ProductosJava> getProductosJava();
-	Optional<ProductosJava> getProductosJava(Long id);
+	ProductosJava getProductosJava(Long id);
 	public ProductosJava RegistrarProducto(ProductosJava producto);
 }

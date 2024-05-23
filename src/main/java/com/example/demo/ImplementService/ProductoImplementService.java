@@ -25,14 +25,9 @@ public class ProductoImplementService implements ProductoService {
 	}
 
 	@Override
-	public Optional<ProductosJava> getProductosJava(Long id) {
-		Optional<ProductosJava> personaOptional = productoRepository.findById(id);
-		if (personaOptional.isPresent()) {
-			return productoRepository.findById(id);
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-					"No se encontró el producto con el ID proporcionado: " + id);
-		}
+	public ProductosJava getProductosJava(Long id) {
+		ProductosJava producto = productoRepository.findById(id).orElse(null);
+		return producto;
 	}
 
 	@Override
