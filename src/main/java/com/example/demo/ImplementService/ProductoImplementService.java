@@ -35,4 +35,9 @@ public class ProductoImplementService implements ProductoService {
         return productoRepository.save(producto);
     }
 
+	@Override
+	public void eliminarProducto(ProductosJava producto) {
+		productoRepository.delete(producto);		
+	}
+
 }

@@ -10,4 +10,5 @@ public interface ProductoService {
 	List<ProductosJava> getProductosJava();
 	ProductosJava getProductosJava(Long id);
 	public ProductosJava RegistrarProducto(ProductosJava producto);
+	public void eliminarProducto(ProductosJava producto);
 }
